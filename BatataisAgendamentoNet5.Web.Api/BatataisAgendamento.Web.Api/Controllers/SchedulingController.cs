@@ -37,17 +37,17 @@ namespace BatataisAgendamento.Web.Api.Controllers
 
         [HttpGet]
         [Route("getbyschedulingid/{id}")]
-        [Produces(typeof(IEnumerable<AgendamentoListDTO>))]
+        [Produces(typeof(AgendamentoListDTO))]
         [SwaggerResponse((int)HttpStatusCode.OK, Description = "OK", Type = typeof(AgendamentoListDTO))]
         [SwaggerResponse((int)HttpStatusCode.Unauthorized, Description = "Erro de Autenticação")]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Description = "Recurso não encontrado")]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Description = "Erro na API")]
-        public IActionResult GetBySchedulingId(int id)
+        public IActionResult GetBySchedulingId(string id)
         {
             if (_bll.GetByScheduling(id) == null)
                 return NotFound();
 
-            return Ok(_mapper.Map<IEnumerable<AgendamentoListDTO>>(_bll.GetByScheduling(id)));
+            return Ok(_mapper.Map<AgendamentoListDTO>(_bll.GetByScheduling(id)));
         }
 
         [HttpPost]
@@ -72,7 +72,7 @@ namespace BatataisAgendamento.Web.Api.Controllers
         [SwaggerResponse((int)HttpStatusCode.NotFound, Description = "Recurso não encontrado")]
         [SwaggerResponse((int)HttpStatusCode.Conflict, Description = "Conflito")]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Description = "Erro na API")]
-        public async Task<IActionResult> EditScheduling(int id, [FromBody] AgendamentoDTO schedulingUpdateDTO)
+        public async Task<IActionResult> EditScheduling(string id, [FromBody] AgendamentoDTO schedulingUpdateDTO)
         {
             if (schedulingUpdateDTO == null)
                 return BadRequest();
@@ -81,13 +81,13 @@ namespace BatataisAgendamento.Web.Api.Controllers
         }
 
         [HttpDelete]
-        [Route("delete/{schedulingid}")]
+        [Route("delete/{id}")]
         [Produces(typeof(OkResult))]
         [SwaggerResponse((int)HttpStatusCode.OK, Description = "Removido com sucesso")]
         [SwaggerResponse((int)HttpStatusCode.Unauthorized, Description = "Erro de Autenticação")]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Description = "Recurso não encontrado")]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Description = "Erro na API")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
             if (_bll.GetByScheduling(id) == null)
                 return NotFound();

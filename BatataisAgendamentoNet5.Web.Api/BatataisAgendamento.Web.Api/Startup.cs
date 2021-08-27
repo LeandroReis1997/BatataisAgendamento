@@ -20,6 +20,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Pomelo.EntityFrameworkCore.MySql;
+using BatataisAgendamento.Web.Info.Data.Configuration;
+using BatataisAgendamento.Web.Info.Data.Configuration.Interface;
+using Microsoft.Extensions.Options;
 
 namespace BatataisAgendamento.Web.Api
 {
@@ -47,9 +50,13 @@ namespace BatataisAgendamento.Web.Api
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-            string mySqlConnection = Configuration.GetConnectionString("MySqlConnectionString");
+            // MongoDB
 
-            services.AddDbContextPool<SqlDbContext>(options => options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
+            services.Configure<ProductStoreDatabaseSettings>(
+                Configuration.GetSection(nameof(ProductStoreDatabaseSettings)));
+
+            services.AddSingleton<IProductStoreDatabaseSettings>(x =>
+            x.GetRequiredService<IOptions<ProductStoreDatabaseSettings>>().Value);
 
             services.AddSwaggerGen(c =>
             {

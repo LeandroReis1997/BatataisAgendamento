@@ -7,9 +7,9 @@ namespace BatataisAgendamento.Web.Dal.Interface
     public interface IAgendamentoDal
     {
         List<AgendamentoInfo> GetAllScheduling();
-        AgendamentoInfo GetBySchedulingId(int id);
+        AgendamentoInfo GetBySchedulingId(string id);
         Task<AgendamentoInfo> AddSchedulingAsync(AgendamentoInfo scheduling);
-        Task<AgendamentoInfo> EditSchedulingAsync(int id, AgendamentoInfo scheduling);
-        Task<int> DeleteScheduling(int id);
+        Task<AgendamentoInfo> EditSchedulingAsync(string id, AgendamentoInfo scheduling);
+        Task<string> DeleteScheduling(string id);
     }
 }

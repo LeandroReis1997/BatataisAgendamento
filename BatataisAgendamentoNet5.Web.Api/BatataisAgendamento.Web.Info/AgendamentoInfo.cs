@@ -1,12 +1,16 @@
-﻿using Nest;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using Nest;
 using System;
 
 namespace BatataisAgendamento.Web.Info
 {
     public class AgendamentoInfo
     {
-        public int Id { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
         public DateTime Dia { get; set; }
-        public Time Horario { get; set; }
+        public string Horario { get; set; }
     }
 }
