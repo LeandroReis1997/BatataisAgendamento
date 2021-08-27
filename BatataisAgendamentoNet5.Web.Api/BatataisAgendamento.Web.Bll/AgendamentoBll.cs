@@ -1,5 +1,5 @@
 ﻿using BatataisAgendamento.Web.Bll.Interface;
-using BatataisAgendamento.Web.Dal;
+using BatataisAgendamento.Web.Dal.Interface;
 using BatataisAgendamento.Web.Info;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,9 +8,9 @@ namespace BatataisAgendamento.Web.Bll
 {
     public class AgendamentoBll : IAgendamentoBll
     {
-        private AgendamentoDal _dal;
+        private IAgendamentoDal _dal;
 
-        public AgendamentoBll(AgendamentoDal agendamentoDal)
+        public AgendamentoBll(IAgendamentoDal agendamentoDal)
         {
             _dal = agendamentoDal;
         }
