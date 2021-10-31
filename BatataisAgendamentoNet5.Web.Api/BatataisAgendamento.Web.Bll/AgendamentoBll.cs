@@ -18,12 +18,13 @@ namespace BatataisAgendamento.Web.Bll
 
         public async Task<AgendamentoInfo> AddScheduling(AgendamentoInfo scheduling)
         {
-            return await _dal.AddSchedulingAsync(new AgendamentoInfo
-            {
-                Id = scheduling.Id,
-                Dia = DateTime.Now.Date,
-                Horario = DateTime.Now.ToString("HH:mm")
-            });
+            return await _dal.AddSchedulingAsync(scheduling);
+            //return await _dal.AddSchedulingAsync(new AgendamentoInfo
+            //{
+            //    Id = scheduling.Id,
+            //    Dia = DateTime.Now.Date,
+            //    Horario = DateTime.Now.ToString("HH:mm")
+            //});
         }
 
         public async Task<string> DeleteScheduling(string id)
