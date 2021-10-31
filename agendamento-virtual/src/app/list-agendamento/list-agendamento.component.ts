@@ -14,12 +14,10 @@ export class ListAgendamentoComponent implements OnInit {
   constructor(private agendamentoService: AgendamentoService) { }
 
   ngOnInit(): void {
-    this.agendamentoService.getAgendamento().subscribe(x =>{
-      this.agendamento = x;
-      console.log(this.agendamento);
+    this.agendamentoService.getAgendamento().subscribe(agendamentoList =>{
+      this.agendamento = agendamentoList;
     }, erro =>{
       console.log(erro);
     })
   }
-
 }

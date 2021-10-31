@@ -14,17 +14,18 @@ export class CadastrarAgendamentoComponent implements OnInit {
 
   constructor(private agendamentoServices: AgendamentoService,
     private router: Router) {
-      this.agendamento = {} as Agendamento;
-     }
+    this.agendamento = {} as Agendamento;
+  }
 
   ngOnInit(): void {
   }
 
   cadastrar(): void {
-      this.agendamentoServices.postAgendamento(this.agendamento).subscribe(x=>{
-        this.agendamento = x;
-      });
-      this.router.navigate(["/agendamento"]);    
+    this.agendamentoServices.postAgendamento(this.agendamento).subscribe(agendamentoPost => {
+      this.agendamento = agendamentoPost;
+      this.router.navigate(["/agendamento"]);
+    }, erro => {
+      console.log(erro);
+    });
   }
-
 }
