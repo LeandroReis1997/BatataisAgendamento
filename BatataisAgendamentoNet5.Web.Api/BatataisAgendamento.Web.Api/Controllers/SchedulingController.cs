@@ -80,9 +80,7 @@ namespace BatataisAgendamento.Web.Api.Controllers
             return Accepted(_mapper.Map<AgendamentoListDTO>(await _bll.EditScheduling(id, _mapper.Map<AgendamentoInfo>(schedulingUpdateDTO))));
         }
 
-        [HttpDelete]
-        [Route("delete/{id}")]
-        [Produces(typeof(OkResult))]
+        [HttpDelete("{id}")]
         [SwaggerResponse((int)HttpStatusCode.OK, Description = "Removido com sucesso")]
         [SwaggerResponse((int)HttpStatusCode.Unauthorized, Description = "Erro de Autenticação")]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Description = "Recurso não encontrado")]

@@ -12,14 +12,19 @@ export class AgendamentoService {
 
   constructor(private http: HttpClient) { }
 
-  get headers(): HttpHeaders {
-    return new HttpHeaders().set("content-type", "application/json");
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
   getAgendamento(): Observable<Agendamento[]> {
     return this.http.get<Agendamento[]>(`${this._baseUrl}`);
   }
 
   postAgendamento(agendamento: Agendamento): Observable<Agendamento> {
-    return this.http.post<Agendamento>(this._baseUrl + "/create", JSON.stringify(agendamento), { headers: this.headers });
+    return this.http.post<Agendamento>(this._baseUrl + "/create", JSON.stringify(agendamento), this.httpOptions);
   }
+
+  deleteAgendamento(agendamento: Agendamento): Observable<Agendamento> {
+    return this.http.delete<Agendamento>(this._baseUrl + `/${agendamento.id}`, this.httpOptions);
+  }
+
 }

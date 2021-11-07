@@ -8,9 +8,15 @@
  <tr>
      <th>Dia</th>
      <th>Horário</th>
+     <th>Ações</th>
  </tr>
  <tr *ngFor="let item of agendamento">
     <td>{{item.dia | date : 'fullDate'}}</td>
     <td>{{item.horario}}</td>
+    <td class="text-center">
+      <a href="#" title="Remover" alt="Remover" class="btn btn-xs btn-danger" (click)="delete(item)" >
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remover
+      </a>
+    </td>
  </tr>
   </table>

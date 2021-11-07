@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { ListAgendamentoComponent } from './list-agendamento/list-agendamento.component';
 import { CadastrarAgendamentoComponent } from './cadastrar-agendamento/cadastrar-agendamento.component';
 import { FormsModule } from '@angular/forms';
-import { registerLocaleData } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import localePT from '@angular/common/locales/pt';
 registerLocaleData(localePT);
 
@@ -23,7 +23,7 @@ registerLocaleData(localePT);
     HttpClientModule,
     FormsModule
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'pt-br' }],
+  providers: [{ provide: LOCALE_ID, useValue: 'pt-br' }, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
