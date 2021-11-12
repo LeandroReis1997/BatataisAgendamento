@@ -11,9 +11,12 @@ import { AgendamentoService } from '../services/agendamento.service';
 export class ListAgendamentoComponent implements OnInit {
 
   agendamento: Agendamento[] = [];
+  agendamento1: Agendamento;
+
 
   constructor(private agendamentoService: AgendamentoService,
     public datePipe: DatePipe) {
+    this.agendamento1 = {} as Agendamento;
   }
 
   ngOnInit(): void {
@@ -26,11 +29,18 @@ export class ListAgendamentoComponent implements OnInit {
     });
   }
 
-  delete(agendamento: Agendamento): void {
+  getAgendamento(agendamento: Agendamento) {
+    this.agendamentoService.getAgendamentoId(agendamento).subscribe(x => {
+      this.agendamento1 = x;
+      console.log(x)
+    })
+  }
+
+  delete(agendamento: Agendamento) {
     if (agendamento.id != null) {
       if (confirm(`Deseja remover o agendamento do dia ${this.datePipe.transform(agendamento.dia, 'dd/MM/yyyy')}?`)) {
         this.agendamentoService.deleteAgendamento(agendamento).subscribe(() => {
-         return this.listar();
+          return this.listar();
         });
       }
     }

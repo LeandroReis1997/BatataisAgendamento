@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Agendamento } from '../models/Agendamento';
 import { AgendamentoService } from '../services/agendamento.service';
 
@@ -13,6 +13,7 @@ export class CadastrarAgendamentoComponent implements OnInit {
   agendamento: Agendamento;
 
   constructor(private agendamentoServices: AgendamentoService,
+    private route: ActivatedRoute,
     private router: Router) {
     this.agendamento = {} as Agendamento;
   }
@@ -28,4 +29,10 @@ export class CadastrarAgendamentoComponent implements OnInit {
       console.log(erro);
     });
   }
+
+  // getAgendamento(id: string) {
+  //   this.agendamentoServices.getAgendamentoId(id.toString()).subscribe(x => {
+  //     this.agendamento = x;
+  //   })
+  // }
 }

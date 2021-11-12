@@ -19,6 +19,10 @@ export class AgendamentoService {
     return this.http.get<Agendamento[]>(`${this._baseUrl}`);
   }
 
+  getAgendamentoId(agendamento: Agendamento): Observable<Agendamento> {
+    return this.http.get<Agendamento>(`${this._baseUrl}/getbyschedulingid/${agendamento.id}`);
+  }
+
   postAgendamento(agendamento: Agendamento): Observable<Agendamento> {
     return this.http.post<Agendamento>(this._baseUrl + "/create", JSON.stringify(agendamento), this.httpOptions);
   }
