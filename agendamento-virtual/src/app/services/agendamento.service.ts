@@ -27,6 +27,10 @@ export class AgendamentoService {
     return this.http.post<Agendamento>(this._baseUrl + "/create", JSON.stringify(agendamento), this.httpOptions);
   }
 
+  putAgendamento(agendamento: Agendamento): Observable<Agendamento> {
+    return this.http.put<Agendamento>(this._baseUrl + `/update/${agendamento.id}`, JSON.stringify(agendamento), this.httpOptions);
+  }
+
   deleteAgendamento(agendamento: Agendamento): Observable<Agendamento> {
     return this.http.delete<Agendamento>(this._baseUrl + `/${agendamento.id}`, this.httpOptions);
   }

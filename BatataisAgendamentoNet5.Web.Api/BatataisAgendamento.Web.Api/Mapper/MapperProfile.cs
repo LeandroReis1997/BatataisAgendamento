@@ -10,9 +10,14 @@ namespace BatataisAgendamento.Web.Api.Mapper
         {
             #region Agendamento
 
-            CreateMap<AgendamentoDTO, AgendamentoInfo>();
+            CreateMap<AgendamentoCreateDTO, AgendamentoInfo>();
 
             CreateMap<AgendamentoListDTO, AgendamentoInfo>().ReverseMap();
+
+            CreateMap<AgendamentoUpdateDTO, AgendamentoInfo>().ReverseMap();
+            
+            CreateMap<AgendamentoDeleteDTO, AgendamentoInfo>().ReverseMap();
+
 
             #endregion
         }

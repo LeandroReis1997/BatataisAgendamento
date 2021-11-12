@@ -16,7 +16,7 @@ namespace BatataisAgendamento.Web.Bll
             _dal = agendamentoDal;
         }
 
-        public async Task<AgendamentoInfo> AddScheduling(AgendamentoInfo scheduling)
+        public async Task<AgendamentoInfo> AddSchedulingAsync(AgendamentoInfo scheduling)
         {
             return await _dal.AddSchedulingAsync(scheduling);
             //return await _dal.AddSchedulingAsync(new AgendamentoInfo
@@ -27,24 +27,29 @@ namespace BatataisAgendamento.Web.Bll
             //});
         }
 
-        public async Task<string> DeleteScheduling(string id)
+        public void DeleteSchedulingAsync(string id)
         {
-            return await _dal.DeleteScheduling(id);
+            _dal.DeleteSchedulingAsync(id);
         }
 
-        public async Task<AgendamentoInfo> EditScheduling(string id, AgendamentoInfo scheduling)
+        public async Task<AgendamentoInfo> EditSchedulingAsync(string id, AgendamentoInfo scheduling)
         {
-            return await _dal.EditSchedulingAsync(id, scheduling);
+            return await _dal.EditSchedulingAsync(id, new AgendamentoInfo
+            {
+                Id = id,
+                Dia = scheduling.Dia,
+                Horario = scheduling.Horario
+            });
         }
 
-        public List<AgendamentoInfo> GetAllScheduling()
+        public async Task<List<AgendamentoInfo>> GetAllSchedulingAsync()
         {
-            return _dal.GetAllScheduling();
+            return await _dal.GetAllSchedulingAsync();
         }
 
-        public AgendamentoInfo GetByScheduling(string id)
+        public async Task<AgendamentoInfo> GetBySchedulingAsync(string id)
         {
-            return _dal.GetBySchedulingId(id);
+            return await _dal.GetBySchedulingIdAsync(id);
         }
     }
 }

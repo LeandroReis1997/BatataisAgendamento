@@ -24,10 +24,9 @@ namespace BatataisAgendamento.Web.Dal
             return scheduling;
         }
 
-        public async Task<string> DeleteScheduling(string id)
+        public void DeleteSchedulingAsync(string id)
         {
-            await _agendamento.DeleteOneAsync(x => x.Id == id);
-            return id;
+            _agendamento.DeleteOneAsync(x => x.Id == id);
         }
 
         public async Task<AgendamentoInfo> EditSchedulingAsync(string id, AgendamentoInfo scheduling)
@@ -36,10 +35,11 @@ namespace BatataisAgendamento.Web.Dal
             return scheduling;
         }
 
-        public List<AgendamentoInfo> GetAllScheduling() => _agendamento.Find(x => true).ToList();
+        public async Task<List<AgendamentoInfo>> GetAllSchedulingAsync() =>
+            await _agendamento.FindAsync(x => true).Result.ToListAsync();
 
 
-        public AgendamentoInfo GetBySchedulingId(string id) =>
-            _agendamento.Find(x => x.Id.Equals(id)).FirstOrDefault();
+        public async Task<AgendamentoInfo> GetBySchedulingIdAsync(string id) =>
+           await _agendamento.FindAsync(x => x.Id.Equals(id)).Result.FirstOrDefaultAsync();
     }
 }

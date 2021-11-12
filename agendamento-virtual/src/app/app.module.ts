@@ -9,15 +9,13 @@ import { CadastrarAgendamentoComponent } from './cadastrar-agendamento/cadastrar
 import { FormsModule } from '@angular/forms';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import localePT from '@angular/common/locales/pt';
-import { EditarAgendamentoComponent } from './editar-agendamento/editar-agendamento.component';
 registerLocaleData(localePT);
 
 @NgModule({
   declarations: [
     AppComponent,
     ListAgendamentoComponent,
-    CadastrarAgendamentoComponent,
-    EditarAgendamentoComponent
+    CadastrarAgendamentoComponent
   ],
   imports: [
     BrowserModule,

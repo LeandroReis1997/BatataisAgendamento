@@ -6,10 +6,10 @@ namespace BatataisAgendamento.Web.Bll.Interface
 {
     public interface IAgendamentoBll
     {
-        List<AgendamentoInfo> GetAllScheduling();
-        AgendamentoInfo GetByScheduling(string id);
-        Task<AgendamentoInfo> AddScheduling(AgendamentoInfo scheduling);
-        Task<AgendamentoInfo> EditScheduling(string id, AgendamentoInfo scheduling);
-        Task<string> DeleteScheduling(string id);
+        Task<List<AgendamentoInfo>> GetAllSchedulingAsync();
+        Task<AgendamentoInfo> GetBySchedulingAsync(string id);
+        Task<AgendamentoInfo> AddSchedulingAsync(AgendamentoInfo scheduling);
+        Task<AgendamentoInfo> EditSchedulingAsync(string id, AgendamentoInfo scheduling);
+        void DeleteSchedulingAsync(string id);
     }
 }

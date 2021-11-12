@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Agendamento } from '../models/Agendamento';
@@ -14,14 +15,25 @@ export class CadastrarAgendamentoComponent implements OnInit {
 
   constructor(private agendamentoServices: AgendamentoService,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    public datePipe: DatePipe) {
     this.agendamento = {} as Agendamento;
   }
 
   ngOnInit(): void {
+    const idAgendamento = this.route.snapshot.params['id'];
+    if(idAgendamento != null && idAgendamento != undefined){
+    this.agendamento.id = idAgendamento;
+    this.agendamentoServices.getAgendamentoId(this.agendamento).subscribe((agenda: any) => {
+      var dateFormat = this.datePipe.transform(agenda.dia, 'yyyy-MM-dd'); // yyyy-MM-ddTHH:mm
+      agenda.dia = dateFormat;
+      this.agendamento = agenda;
+    });
+  }
   }
 
-  cadastrar(): void {
+  cadastrar(id: string): void {
+    if(id == null && id == undefined){
     this.agendamentoServices.postAgendamento(this.agendamento).subscribe(agendamentoPost => {
       this.agendamento = agendamentoPost;
       this.router.navigate(["/agendamento"]);
@@ -29,10 +41,23 @@ export class CadastrarAgendamentoComponent implements OnInit {
       console.log(erro);
     });
   }
+  else{
+    this.agendamentoServices.putAgendamento(this.agendamento).subscribe(agendamentoPut =>{
+      this.agendamento = agendamentoPut;
+      this.router.navigate(["/agendamento"]);
+    }, erro =>{
+      console.log(erro);
+    })
+  }
+  }
 
-  // getAgendamento(id: string) {
-  //   this.agendamentoServices.getAgendamentoId(id.toString()).subscribe(x => {
-  //     this.agendamento = x;
-  //   })
-  // }
+  atualizar(){
+    this.agendamentoServices.putAgendamento(this.agendamento).subscribe(agendamentoPut =>{
+      this.agendamento = agendamentoPut;
+      this.router.navigate(["/agendamento"]);
+    }, erro =>{
+      console.log(erro);
+    })
+  }
+
 }
