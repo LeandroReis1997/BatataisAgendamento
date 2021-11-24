@@ -7,9 +7,7 @@ namespace BatataisAgendamento.Web.Info
 {
     public class AgendamentoInfo
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public int Id { get; set; }
         public DateTime Dia { get; set; }
         public string Horario { get; set; }
     }

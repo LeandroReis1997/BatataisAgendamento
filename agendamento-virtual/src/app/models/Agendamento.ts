@@ -1,5 +1,5 @@
 export interface Agendamento {
-     id: string;
+     id: number;
      dia: Date;
      horario: string;
   

@@ -1,6 +1,7 @@
 ﻿using BatataisAgendamento.Web.Dal.Interface;
 using BatataisAgendamento.Web.Info;
 using BatataisAgendamento.Web.Info.Data.Configuration.Interface;
+using BatataisAgendamento.Web.Info.SqlDbContext;
 using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,36 +11,39 @@ namespace BatataisAgendamento.Web.Dal
 {
     public class AgendamentoDal : IAgendamentoDal
     {
-        private readonly IMongoCollection<AgendamentoInfo> _agendamento;
-        public AgendamentoDal(IProductStoreDatabaseSettings configuration)
+        private readonly SqlDbContext _agendamento;
+        public AgendamentoDal(SqlDbContext sqlDbContext)
         {
-            var client = new MongoClient(configuration.ConnectionString);
-            var database = client.GetDatabase(configuration.DatabaseName);
-            _agendamento = database.GetCollection<AgendamentoInfo>(configuration.ProductCollectionName);
+            _agendamento = sqlDbContext;
         }
 
         public async Task<AgendamentoInfo> AddSchedulingAsync(AgendamentoInfo scheduling)
         {
-            await _agendamento.InsertOneAsync(scheduling);
+            await _agendamento.AddAsync(scheduling);
+            await _agendamento.SaveChangesAsync();
+
             return scheduling;
         }
 
-        public void DeleteSchedulingAsync(string id)
+        public async Task DeleteSchedulingAsync(int id)
         {
-            _agendamento.DeleteOneAsync(x => x.Id == id);
+            var entity = _agendamento.Agendamento.FirstOrDefault(x => x.Id.Equals(id));
+            _agendamento.Remove(entity);
+            await _agendamento.SaveChangesAsync();
         }
 
-        public async Task<AgendamentoInfo> EditSchedulingAsync(string id, AgendamentoInfo scheduling)
+        public async Task<AgendamentoInfo> EditSchedulingAsync(int id, AgendamentoInfo scheduling)
         {
-            await _agendamento.ReplaceOneAsync(x => x.Id == id, scheduling);
+            _agendamento.Update(scheduling);
+            await _agendamento.SaveChangesAsync();
             return scheduling;
         }
 
-        public async Task<List<AgendamentoInfo>> GetAllSchedulingAsync() =>
-            await _agendamento.FindAsync(x => true).Result.ToListAsync();
+        public List<AgendamentoInfo> GetAllSchedulingAsync() =>
+            _agendamento.Agendamento.ToList();
 
 
-        public async Task<AgendamentoInfo> GetBySchedulingIdAsync(string id) =>
-           await _agendamento.FindAsync(x => x.Id.Equals(id)).Result.FirstOrDefaultAsync();
+        public AgendamentoInfo GetBySchedulingIdAsync(int id) =>
+            _agendamento.Agendamento.FirstOrDefault(x => x.Id.Equals(id));
     }
 }

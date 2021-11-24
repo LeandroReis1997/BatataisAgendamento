@@ -31,13 +31,13 @@ namespace BatataisAgendamento.Web.Api.Controllers
         [SwaggerResponse((int)HttpStatusCode.NotFound, Description = "Recurso não encontrado")]
         [SwaggerResponse((int)HttpStatusCode.Conflict, Description = "Conflito")]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Description = "Erro na API")]
-        public async Task<IActionResult> GetAllScheduling()
+        public IActionResult GetAllScheduling()
         {
-            return Ok(_mapper.Map<List<AgendamentoListDTO>>(await _bll.GetAllSchedulingAsync()));
+            return Ok(_mapper.Map<List<AgendamentoListDTO>>(_bll.GetAllSchedulingAsync()));
         }
 
         [HttpGet]
-        [Route("getbyschedulingid/{id:length(24)}")]
+        [Route("getbyschedulingid/{id}")]
         [Produces(typeof(AgendamentoListDTO))]
         [SwaggerResponse((int)HttpStatusCode.OK, Description = "OK", Type = typeof(AgendamentoListDTO))]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, Description = "Requisição mal-formatada")]
@@ -45,12 +45,12 @@ namespace BatataisAgendamento.Web.Api.Controllers
         [SwaggerResponse((int)HttpStatusCode.NotFound, Description = "Recurso não encontrado")]
         [SwaggerResponse((int)HttpStatusCode.Conflict, Description = "Conflito")]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Description = "Erro na API")]
-        public async Task<IActionResult> GetBySchedulingId(string id)
+        public IActionResult GetBySchedulingId(int id)
         {
             if (_bll.GetBySchedulingAsync(id) == null)
                 return NotFound();
 
-            return Ok(_mapper.Map<AgendamentoListDTO>(await _bll.GetBySchedulingAsync(id)));
+            return Ok(_mapper.Map<AgendamentoListDTO>(_bll.GetBySchedulingAsync(id)));
         }
 
         [HttpPost]
@@ -67,7 +67,7 @@ namespace BatataisAgendamento.Web.Api.Controllers
         }
 
         [HttpPut]
-        [Route("update/{id:length(24)}")]
+        [Route("update/{id}")]
         [Produces(typeof(IEnumerable<AgendamentoCreateDTO>))]
         [SwaggerResponse((int)HttpStatusCode.OK, Description = "Alterado com sucesso", Type = typeof(AgendamentoCreateDTO))]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, Description = "Requisição mal-formatada")]
@@ -75,7 +75,7 @@ namespace BatataisAgendamento.Web.Api.Controllers
         [SwaggerResponse((int)HttpStatusCode.NotFound, Description = "Recurso não encontrado")]
         [SwaggerResponse((int)HttpStatusCode.Conflict, Description = "Conflito")]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Description = "Erro na API")]
-        public async Task<IActionResult> EditScheduling(string id, [FromBody] AgendamentoCreateDTO schedulingUpdateDTO)
+        public async Task<IActionResult> EditScheduling(int id, [FromBody] AgendamentoCreateDTO schedulingUpdateDTO)
         {
             if (schedulingUpdateDTO == null)
                 return BadRequest();
@@ -83,22 +83,22 @@ namespace BatataisAgendamento.Web.Api.Controllers
             return Accepted(_mapper.Map<AgendamentoUpdateDTO>(await _bll.EditSchedulingAsync(id, _mapper.Map<AgendamentoInfo>(schedulingUpdateDTO))));
         }
 
-        [HttpDelete("{id:length(24)}")]
+        [HttpDelete("{id}")]
         [SwaggerResponse((int)HttpStatusCode.OK, Description = "Removido com sucesso")]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, Description = "Requisição mal-formatada")]
         [SwaggerResponse((int)HttpStatusCode.Unauthorized, Description = "Erro de Autenticação")]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Description = "Recurso não encontrado")]
         [SwaggerResponse((int)HttpStatusCode.Conflict, Description = "Conflito")]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Description = "Erro na API")]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
-            AgendamentoInfo agendamento = await _bll.GetBySchedulingAsync(id);
+            AgendamentoInfo agendamento = _bll.GetBySchedulingAsync(id);
             if (agendamento == null)
             {
                 return NotFound();
             }
 
-            _bll.DeleteSchedulingAsync(agendamento.Id);
+            await _bll.DeleteSchedulingAsync(agendamento.Id);
 
             return new ObjectResult(_mapper.Map<AgendamentoDeleteDTO>(agendamento));
         }

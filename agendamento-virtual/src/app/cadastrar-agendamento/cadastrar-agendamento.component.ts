@@ -32,7 +32,7 @@ export class CadastrarAgendamentoComponent implements OnInit {
     }
   }
 
-  enviar(id: string): void {
+  enviar(id: number): void {
     if (id == null && id == undefined) {
       this.agendamentoServices.postAgendamento(this.agendamento).subscribe(agendamentoPost => {
         this.agendamento = agendamentoPost;

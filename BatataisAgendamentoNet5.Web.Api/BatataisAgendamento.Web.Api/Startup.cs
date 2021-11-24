@@ -42,6 +42,11 @@ namespace BatataisAgendamento.Web.Api
             services.AddScoped<IAgendamentoBll, AgendamentoBll>();
             services.AddScoped<IAgendamentoDal, AgendamentoDal>();
 
+            string mySqlConnection = Configuration.GetConnectionString("DefaultConnection");
+
+            services.AddDbContextPool<SqlDbContext>(options =>
+            options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
+
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new MapperProfile());
@@ -49,14 +54,6 @@ namespace BatataisAgendamento.Web.Api
 
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
-
-            // MongoDB
-
-            services.Configure<ProductStoreDatabaseSettings>(
-                Configuration.GetSection(nameof(ProductStoreDatabaseSettings)));
-
-            services.AddSingleton<IProductStoreDatabaseSettings>(x =>
-            x.GetRequiredService<IOptions<ProductStoreDatabaseSettings>>().Value);
 
             services.AddSwaggerGen(c =>
             {
