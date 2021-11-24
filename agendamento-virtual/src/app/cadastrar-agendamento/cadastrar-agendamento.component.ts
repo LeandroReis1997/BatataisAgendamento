@@ -22,42 +22,28 @@ export class CadastrarAgendamentoComponent implements OnInit {
 
   ngOnInit(): void {
     const idAgendamento = this.route.snapshot.params['id'];
-    if(idAgendamento != null && idAgendamento != undefined){
-    this.agendamento.id = idAgendamento;
-    this.agendamentoServices.getAgendamentoId(this.agendamento).subscribe((agenda: any) => {
-      var dateFormat = this.datePipe.transform(agenda.dia, 'yyyy-MM-dd'); // yyyy-MM-ddTHH:mm
-      agenda.dia = dateFormat;
-      this.agendamento = agenda;
-    });
-  }
-  }
-
-  cadastrar(id: string): void {
-    if(id == null && id == undefined){
-    this.agendamentoServices.postAgendamento(this.agendamento).subscribe(agendamentoPost => {
-      this.agendamento = agendamentoPost;
-      this.router.navigate(["/agendamento"]);
-    }, erro => {
-      console.log(erro);
-    });
-  }
-  else{
-    this.agendamentoServices.putAgendamento(this.agendamento).subscribe(agendamentoPut =>{
-      this.agendamento = agendamentoPut;
-      this.router.navigate(["/agendamento"]);
-    }, erro =>{
-      console.log(erro);
-    })
-  }
+    if (idAgendamento != null && idAgendamento != undefined) {
+      this.agendamento.id = idAgendamento;
+      this.agendamentoServices.getAgendamentoId(this.agendamento).subscribe((agenda: any) => {
+        var dateFormat = this.datePipe.transform(agenda.dia, 'yyyy-MM-dd'); // yyyy-MM-ddTHH:mm
+        agenda.dia = dateFormat;
+        this.agendamento = agenda;
+      });
+    }
   }
 
-  atualizar(){
-    this.agendamentoServices.putAgendamento(this.agendamento).subscribe(agendamentoPut =>{
-      this.agendamento = agendamentoPut;
-      this.router.navigate(["/agendamento"]);
-    }, erro =>{
-      console.log(erro);
-    })
+  enviar(id: string): void {
+    if (id == null && id == undefined) {
+      this.agendamentoServices.postAgendamento(this.agendamento).subscribe(agendamentoPost => {
+        this.agendamento = agendamentoPost;
+        this.router.navigate(["/agendamento"]);
+      });
+    }
+    else {
+      this.agendamentoServices.putAgendamento(this.agendamento).subscribe(agendamentoPut => {
+        this.agendamento = agendamentoPut;
+        this.router.navigate(["/agendamento"]);
+      });
+    }
   }
-
 }
