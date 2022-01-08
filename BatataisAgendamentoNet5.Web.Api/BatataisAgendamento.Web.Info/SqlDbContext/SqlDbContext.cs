@@ -7,6 +7,7 @@ namespace BatataisAgendamento.Web.Info.SqlDbContext
         public SqlDbContext(DbContextOptions<SqlDbContext> options)
             : base(options) { }
 
-        public DbSet<AgendamentoInfo> Agendamento { get; set; }
+        public DbSet<SchedulingDayInfo> SchedulingDay { get; set; }
+        public DbSet<SchedulingHourInfo> SchedulingHour { get; set; }
     }
 }

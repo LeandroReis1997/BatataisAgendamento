@@ -5,10 +5,9 @@ using System;
 
 namespace BatataisAgendamento.Web.Info
 {
-    public class AgendamentoInfo
+    public class SchedulingDayInfo
     {
         public int Id { get; set; }
-        public DateTime Dia { get; set; }
-        public string Horario { get; set; }
+        public DateTime Date { get; set; }
     }
 }

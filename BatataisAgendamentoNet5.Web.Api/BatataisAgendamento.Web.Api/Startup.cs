@@ -39,8 +39,10 @@ namespace BatataisAgendamento.Web.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddScoped<IAgendamentoBll, AgendamentoBll>();
-            services.AddScoped<IAgendamentoDal, AgendamentoDal>();
+            services.AddScoped<ISchedulingDayBll, SchedulingDayBll>();
+            services.AddScoped<ISchedulingDayDal, SchedulingDayDal>();
+            services.AddScoped<ISchedulingHourBll, SchedulingHourBll>();
+            services.AddScoped<ISchedulingHourDal, SchedulingHourDal>();
 
             string mySqlConnection = Configuration.GetConnectionString("DefaultConnection");
 
