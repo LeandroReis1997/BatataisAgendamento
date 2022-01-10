@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BatataisAgendamento.Web.Api.DTO.SchedulingDayDTO;
+using BatataisAgendamento.Web.Api.DTO.SchedulingHourDTO;
 using BatataisAgendamento.Web.Bll.Interface;
 using BatataisAgendamento.Web.Info;
 using Microsoft.AspNetCore.Mvc;
@@ -10,77 +10,77 @@ using System.Threading.Tasks;
 
 namespace BatataisAgendamento.Web.Api.Controllers
 {
-    [Route("webapi/schedulingday")]
+    [Route("webapi/schedulinghour")]
     [ApiController]
-    public class SchedulingDayController : ControllerBase
+    public class SchedulingHourController : ControllerBase
     {
-        private ISchedulingDayBll _bll;
+        private ISchedulingHourBll _bll;
         private readonly IMapper _mapper;
 
-        public SchedulingDayController(IMapper mapper, ISchedulingDayBll schedulingDayBll)
+        public SchedulingHourController(IMapper mapper, ISchedulingHourBll schedulingHourBll)
         {
-            _bll = schedulingDayBll;
+            _bll = schedulingHourBll;
             _mapper = mapper;
         }
 
         [HttpGet]
-        [Produces(typeof(IEnumerable<SchedulingDayListDTO>))]
-        [SwaggerResponse((int)HttpStatusCode.OK, Description = "OK", Type = typeof(IEnumerable<SchedulingDayListDTO>))]
+        [Produces(typeof(IEnumerable<SchedulingHourListDTO>))]
+        [SwaggerResponse((int)HttpStatusCode.OK, Description = "OK", Type = typeof(IEnumerable<SchedulingHourListDTO>))]
         [SwaggerResponse((int)HttpStatusCode.Unauthorized, Description = "Erro de Autenticação")]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, Description = "Requisição mal-formatada")]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Description = "Recurso não encontrado")]
         [SwaggerResponse((int)HttpStatusCode.Conflict, Description = "Conflito")]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Description = "Erro na API")]
-        public IActionResult GetAllSchedulingDayAsync()
+        public async Task<IActionResult> GetAllSchedulingHourAsync()
         {
-            return Ok(_mapper.Map<List<SchedulingDayListDTO>>(_bll.GetAllSchedulingDayAsync()));
+            return Ok(_mapper.Map<List<SchedulingHourListDTO>>(await _bll.GetAllSchedulingHourAsync()));
         }
 
         [HttpGet]
-        [Route("getbyschedulingdayid/{id}")]
-        [Produces(typeof(SchedulingDayListDTO))]
-        [SwaggerResponse((int)HttpStatusCode.OK, Description = "OK", Type = typeof(SchedulingDayListDTO))]
+        [Route("getbyschedulinghourid/{id}")]
+        [Produces(typeof(SchedulingHourListDTO))]
+        [SwaggerResponse((int)HttpStatusCode.OK, Description = "OK", Type = typeof(SchedulingHourListDTO))]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, Description = "Requisição mal-formatada")]
         [SwaggerResponse((int)HttpStatusCode.Unauthorized, Description = "Erro de Autenticação")]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Description = "Recurso não encontrado")]
         [SwaggerResponse((int)HttpStatusCode.Conflict, Description = "Conflito")]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Description = "Erro na API")]
-        public IActionResult GetBySchedulingDayIdAsync(int id)
+        public async Task<IActionResult> GetBySchedulingHourIdAsync(int id)
         {
-            if (_bll.GetBySchedulingDayIdAsync(id) == null)
+            if (await _bll.GetBySchedulingHourIdAsync(id) == null)
                 return NotFound();
 
-            return Ok(_mapper.Map<SchedulingDayListDTO>(_bll.GetBySchedulingDayIdAsync(id)));
+            return Ok(_mapper.Map<SchedulingHourListDTO>(await _bll.GetBySchedulingHourIdAsync(id)));
         }
 
         [HttpPost]
         [Route("create")]
-        [Produces(typeof(IEnumerable<SchedulingDayCreateDTO>))]
-        [SwaggerResponse((int)HttpStatusCode.Created, Description = "Inserido com sucesso", Type = typeof(SchedulingDayCreateDTO))]
+        [Produces(typeof(IEnumerable<SchedulingHourCreateDTO>))]
+        [SwaggerResponse((int)HttpStatusCode.Created, Description = "Inserido com sucesso", Type = typeof(SchedulingHourCreateDTO))]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, Description = "Requisição mal-formatada")]
         [SwaggerResponse((int)HttpStatusCode.Unauthorized, Description = "Erro de Autenticação")]
         [SwaggerResponse((int)HttpStatusCode.Conflict, Description = "Conflito")]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Description = "Erro na API")]
-        public async Task<IActionResult> AddSchedulingDayAsync([FromBody] SchedulingDayCreateDTO schedulingDayCreateDTO)
+        public async Task<IActionResult> AddSchedulingHourAsync([FromBody] SchedulingHourCreateDTO schedulingCreateDTO)
         {
-            return Ok(await _bll.AddSchedulingDayAsync(_mapper.Map<SchedulingDayInfo>(schedulingDayCreateDTO)));
+            return Ok(await _bll.AddSchedulingHourAsync(_mapper.Map<SchedulingHourInfo>(schedulingCreateDTO)));
         }
 
         [HttpPut]
         [Route("update/{id}")]
-        [Produces(typeof(IEnumerable<SchedulingDayCreateDTO>))]
-        [SwaggerResponse((int)HttpStatusCode.OK, Description = "Alterado com sucesso", Type = typeof(SchedulingDayCreateDTO))]
+        [Produces(typeof(IEnumerable<SchedulingHourCreateDTO>))]
+        [SwaggerResponse((int)HttpStatusCode.OK, Description = "Alterado com sucesso", Type = typeof(SchedulingHourCreateDTO))]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, Description = "Requisição mal-formatada")]
         [SwaggerResponse((int)HttpStatusCode.Unauthorized, Description = "Erro de Autenticação")]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Description = "Recurso não encontrado")]
         [SwaggerResponse((int)HttpStatusCode.Conflict, Description = "Conflito")]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Description = "Erro na API")]
-        public async Task<IActionResult> EditSchedulingDayAsync(int id, [FromBody] SchedulingDayCreateDTO schedulingUpdateDTO)
+        public async Task<IActionResult> EditSchedulingHourAsync(int id, [FromBody] SchedulingHourCreateDTO schedulingUpdateDTO)
         {
             if (schedulingUpdateDTO == null)
                 return BadRequest();
 
-            return Accepted(_mapper.Map<SchedulingDayUpdateDTO>(await _bll.EditSchedulingDayAsync(id, _mapper.Map<SchedulingDayInfo>(schedulingUpdateDTO))));
+            return Accepted(_mapper.Map<SchedulingHourUpdateDTO>(await _bll.EditSchedulingHourAsync(id, _mapper.Map<SchedulingHourInfo>(schedulingUpdateDTO))));
         }
 
         [HttpDelete("{id}")]
@@ -92,15 +92,15 @@ namespace BatataisAgendamento.Web.Api.Controllers
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, Description = "Erro na API")]
         public async Task<IActionResult> Delete(int id)
         {
-            SchedulingDayInfo agendamento = _bll.GetBySchedulingDayIdAsync(id);
+            SchedulingHourInfo agendamento = await _bll.GetBySchedulingHourIdAsync(id);
             if (agendamento == null)
             {
                 return NotFound();
             }
 
-            await _bll.DeleteSchedulingDayAsync(agendamento.Id);
+            await _bll.DeleteSchedulingHourAsync(agendamento.Id);
 
-            return new ObjectResult(_mapper.Map<SchedulingDayDeleteDTO>(agendamento));
+            return new ObjectResult(_mapper.Map<SchedulingHourDeleteDTO>(agendamento));
         }
     }
 }

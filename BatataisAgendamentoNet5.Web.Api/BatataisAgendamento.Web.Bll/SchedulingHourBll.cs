@@ -35,14 +35,14 @@ namespace BatataisAgendamento.Web.Bll
             });
         }
 
-        public List<SchedulingHourInfo> GetAllSchedulingHourAsync()
+        public async Task<List<SchedulingHourInfo>> GetAllSchedulingHourAsync()
         {
-            return _dal.GetAllSchedulingHourAsync();
+            return await _dal.GetAllSchedulingHourAsync();
         }
 
-        public SchedulingHourInfo GetBySchedulingHourIdAsync(int id)
+        public async Task<SchedulingHourInfo> GetBySchedulingHourIdAsync(int id)
         {
-            return _dal.GetBySchedulingHourIdAsync(id);
+            return await _dal.GetBySchedulingHourIdAsync(id);
         }
     }
 }

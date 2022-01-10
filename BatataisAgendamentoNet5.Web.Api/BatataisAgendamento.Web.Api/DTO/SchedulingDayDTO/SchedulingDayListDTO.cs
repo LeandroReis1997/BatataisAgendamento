@@ -1,7 +1,7 @@
 ﻿using Nest;
 using System;
 
-namespace BatataisAgendamento.Web.Api.DTO
+namespace BatataisAgendamento.Web.Api.DTO.SchedulingDayDTO
 {
     public class SchedulingDayListDTO
     {

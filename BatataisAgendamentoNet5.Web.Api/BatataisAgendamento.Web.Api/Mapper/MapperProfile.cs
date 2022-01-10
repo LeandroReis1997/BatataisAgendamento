@@ -1,25 +1,40 @@
 ﻿using AutoMapper;
-using BatataisAgendamento.Web.Api.DTO;
+using BatataisAgendamento.Web.Api.DTO.SchedulingDayDTO;
+using BatataisAgendamento.Web.Api.DTO.SchedulingHourDTO;
 using BatataisAgendamento.Web.Info;
 
 namespace BatataisAgendamento.Web.Api.Mapper
 {
-    public class MapperProfile: Profile
+    public class MapperProfile : Profile
     {
         public MapperProfile()
         {
-            #region Agendamento
+            #region Agendamento Dia
 
-            CreateMap<SchedulingDayCreateDTO, SchedulingDayInfo>();
+            CreateMap<SchedulingDayInfo, SchedulingDayCreateDTO>();
 
-            CreateMap<SchedulingDayListDTO, SchedulingDayInfo>().ReverseMap();
+            CreateMap<SchedulingDayInfo, SchedulingDayListDTO>();
 
-            CreateMap<SchedulingDayUpdateDTO, SchedulingDayInfo>().ReverseMap();
-            
-            CreateMap<SchedulingDayDeleteDTO, SchedulingDayInfo>().ReverseMap();
+            CreateMap<SchedulingDayInfo, SchedulingDayUpdateDTO>();
+
+            CreateMap<SchedulingDayInfo, SchedulingDayDeleteDTO>();
 
 
             #endregion
+
+            #region Agendamento Horário
+
+            CreateMap<SchedulingHourInfo, SchedulingHourCreateDTO>();
+
+            CreateMap<SchedulingHourInfo, SchedulingHourListDTO>();
+
+            CreateMap<SchedulingHourInfo, SchedulingHourUpdateDTO>();
+
+            CreateMap<SchedulingHourInfo, SchedulingHourDeleteDTO>();
+
+
+            #endregion
+
         }
     }
 }

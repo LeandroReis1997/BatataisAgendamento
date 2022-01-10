@@ -1,6 +1,7 @@
 ﻿using BatataisAgendamento.Web.Dal.Interface;
 using BatataisAgendamento.Web.Info;
 using BatataisAgendamento.Web.Info.SqlDbContext;
+using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,11 +39,11 @@ namespace BatataisAgendamento.Web.Dal
             return schedulingHour;
         }
 
-        public List<SchedulingHourInfo> GetAllSchedulingHourAsync() =>
-            _agendamentoHour.SchedulingHour.ToList();
+        public async Task<List<SchedulingHourInfo>> GetAllSchedulingHourAsync() =>
+            await _agendamentoHour.SchedulingHour.Include(x => x.SchedulingDay).ToListAsync();
 
 
-        public SchedulingHourInfo GetBySchedulingHourIdAsync(int id) =>
-            _agendamentoHour.SchedulingHour.FirstOrDefault(x => x.Id.Equals(id));
+        public async Task<SchedulingHourInfo> GetBySchedulingHourIdAsync(int id) =>
+           await _agendamentoHour.SchedulingHour.Include(x=> x.SchedulingDay).FirstOrDefaultAsync(x => x.Id.Equals(id));
     }
 }
