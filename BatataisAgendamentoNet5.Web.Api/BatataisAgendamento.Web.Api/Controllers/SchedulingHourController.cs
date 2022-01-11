@@ -80,7 +80,10 @@ namespace BatataisAgendamento.Web.Api.Controllers
             if (schedulingUpdateDTO == null)
                 return BadRequest();
 
-            return Accepted(_mapper.Map<SchedulingHourUpdateDTO>(await _bll.EditSchedulingHourAsync(id, _mapper.Map<SchedulingHourInfo>(schedulingUpdateDTO))));
+            if (await _bll.GetBySchedulingHourIdAsync(id) == null)
+                return NotFound("Não foi possível encontrar o id do dia.");
+
+            return Accepted(await _bll.EditSchedulingHourAsync(id, _mapper.Map<SchedulingHourInfo>(schedulingUpdateDTO)));
         }
 
         [HttpDelete("{id}")]
@@ -94,9 +97,7 @@ namespace BatataisAgendamento.Web.Api.Controllers
         {
             SchedulingHourInfo agendamento = await _bll.GetBySchedulingHourIdAsync(id);
             if (agendamento == null)
-            {
                 return NotFound();
-            }
 
             await _bll.DeleteSchedulingHourAsync(agendamento.Id);
 

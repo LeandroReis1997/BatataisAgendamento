@@ -11,7 +11,7 @@ namespace BatataisAgendamento.Web.Api.Mapper
         {
             #region Agendamento Dia
 
-            CreateMap<SchedulingDayInfo, SchedulingDayCreateDTO>();
+            CreateMap<SchedulingDayInfo, SchedulingDayCreateDTO>().ReverseMap();
 
             CreateMap<SchedulingDayInfo, SchedulingDayListDTO>();
 
@@ -24,7 +24,7 @@ namespace BatataisAgendamento.Web.Api.Mapper
 
             #region Agendamento Horário
 
-            CreateMap<SchedulingHourInfo, SchedulingHourCreateDTO>();
+            CreateMap<SchedulingHourInfo, SchedulingHourCreateDTO>().ReverseMap();
 
             CreateMap<SchedulingHourInfo, SchedulingHourListDTO>();
 

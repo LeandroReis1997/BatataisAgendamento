@@ -1,7 +1,4 @@
-﻿using Nest;
-using System;
-
-namespace BatataisAgendamento.Web.Api.DTO.SchedulingHourDTO
+﻿namespace BatataisAgendamento.Web.Api.DTO.SchedulingHourDTO
 {
     public class SchedulingHourUpdateDTO
     {

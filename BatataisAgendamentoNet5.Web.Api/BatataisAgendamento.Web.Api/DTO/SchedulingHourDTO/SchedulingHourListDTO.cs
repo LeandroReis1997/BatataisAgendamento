@@ -1,5 +1,4 @@
 ﻿using BatataisAgendamento.Web.Api.DTO.SchedulingDayDTO;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BatataisAgendamento.Web.Api.DTO.SchedulingHourDTO
 {

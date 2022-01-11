@@ -9,14 +9,17 @@ namespace BatataisAgendamento.Web.Bll
     public class SchedulingHourBll : ISchedulingHourBll
     {
         private ISchedulingHourDal _dal;
+        private ISchedulingDayDal _schedulingDayDal;
 
-        public SchedulingHourBll(ISchedulingHourDal schedulingHourDal)
+        public SchedulingHourBll(ISchedulingHourDal schedulingHourDal, ISchedulingDayDal schedulingDayDal)
         {
             _dal = schedulingHourDal;
+            _schedulingDayDal = schedulingDayDal;
         }
 
         public async Task<SchedulingHourInfo> AddSchedulingHourAsync(SchedulingHourInfo schedulingHour)
         {
+            schedulingHour.SchedulingDay = _schedulingDayDal.GetBySchedulingDayIdAsync(schedulingHour.IdDay);
             return await _dal.AddSchedulingHourAsync(schedulingHour);
         }
 
@@ -27,11 +30,13 @@ namespace BatataisAgendamento.Web.Bll
 
         public async Task<SchedulingHourInfo> EditSchedulingHourAsync(int id, SchedulingHourInfo schedulingHour)
         {
+            schedulingHour.SchedulingDay = _schedulingDayDal.GetBySchedulingDayIdAsync(schedulingHour.IdDay);
             return await _dal.EditSchedulingHourAsync(id, new SchedulingHourInfo
             {
                 Id = id,
                 Hour = schedulingHour.Hour,
-                IdDay = schedulingHour.IdDay
+                IdDay = schedulingHour.IdDay,
+                SchedulingDay = schedulingHour.SchedulingDay
             });
         }
 
