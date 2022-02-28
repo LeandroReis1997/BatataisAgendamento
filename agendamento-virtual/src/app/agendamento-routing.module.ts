@@ -1,23 +1,23 @@
 import { Routes } from "@angular/router";
-import { CadastrarAgendamentoComponent } from "./cadastrar-agendamento/cadastrar-agendamento.component";
-import { ListAgendamentoComponent } from "./list-agendamento/list-agendamento.component";
+import { CadastrarSchedulingDayComponent } from "./cadastrar-agendamento/cadastrar-schedulingDay.component";
+import { ListSchedulingDayComponent } from "./list-agendamento/list-schedulingDay.component";
 
 
 export const AgendamentoRoutes: Routes = [
     {
-        path: 'agendamento',
-        redirectTo: 'agendamento/listar'
+        path: 'schedulingDay',
+        redirectTo: 'schedulingDay/listar'
     },
     {
-        path: 'agendamento/listar',
-        component: ListAgendamentoComponent
+        path: 'schedulingDay/listar',
+        component: ListSchedulingDayComponent
     },
     {
-        path: 'agendamento/cadastrar',
-        component: CadastrarAgendamentoComponent
+        path: 'schedulingDay/cadastrar',
+        component: CadastrarSchedulingDayComponent
     },
     {
-        path: 'agendamento/cadastrar/:id',
-        component: CadastrarAgendamentoComponent
+        path: 'schedulingDay/cadastrar/:id',
+        component: CadastrarSchedulingDayComponent
     }
 ];

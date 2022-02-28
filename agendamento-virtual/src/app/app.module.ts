@@ -4,8 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ListAgendamentoComponent } from './list-agendamento/list-agendamento.component';
-import { CadastrarAgendamentoComponent } from './cadastrar-agendamento/cadastrar-agendamento.component';
+import { ListAgendamentoComponent } from './list-agendamento/list-schedulingDay.component';
+import { CadastrarAgendamentoComponent } from './cadastrar-agendamento/cadastrar-schedulingDay.component';
 import { FormsModule } from '@angular/forms';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import localePT from '@angular/common/locales/pt';
