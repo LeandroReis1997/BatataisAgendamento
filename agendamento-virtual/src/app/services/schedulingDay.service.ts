@@ -20,7 +20,7 @@ export class SchedulingDayService {
   }
 
   getSchedulingDayId(schedulingDay: SchedulingDay): Observable<SchedulingDay> {
-    return this.http.get<SchedulingDay>(`${this._baseUrl}/getbyschedulingid/${schedulingDay.id}`);
+    return this.http.get<SchedulingDay>(`${this._baseUrl}/getbyschedulingdayid/${schedulingDay.id}`);
   }
 
   postSchedulingDay(schedulingDay: SchedulingDay): Observable<SchedulingDay> {

@@ -27,8 +27,8 @@ export class PostSchedulingDayComponent implements OnInit {
     if (idAgendamento != null && idAgendamento != undefined) {
       this.schedulingDay.id = idAgendamento;
       this.schedulingDayServices.getSchedulingDayId(this.schedulingDay).subscribe((agenda: any) => {
-        var dateFormat = this.datePipe.transform(agenda.dia, 'yyyy-MM-dd'); // yyyy-MM-ddTHH:mm
-        agenda.dia = dateFormat;
+        var dateFormat = this.datePipe.transform(agenda.date, 'yyyy-MM-dd'); // yyyy-MM-ddTHH:mm
+        agenda.date = dateFormat;
         this.schedulingDay = agenda;
         console.log(this.schedulingDay)
       });
