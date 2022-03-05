@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AgendamentoRoutes } from './agendamento-routing.module';
+import { SchedulingRoutes } from './schedulingDay-routing.module';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/agendamento/listar',
+    redirectTo: '/schedulingDay/listar',
     pathMatch: 'full'
   },
-  ...AgendamentoRoutes
+  ...SchedulingRoutes
 ];
 
 @NgModule({

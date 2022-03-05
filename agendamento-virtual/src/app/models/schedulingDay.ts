@@ -1,4 +1,4 @@
 export interface SchedulingDay {
      id: number;
-     dia: Date;
+     date: Date;
 }

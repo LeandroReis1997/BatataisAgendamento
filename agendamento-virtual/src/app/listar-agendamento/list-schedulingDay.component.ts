@@ -22,13 +22,14 @@ export class ListSchedulingDayComponent implements OnInit {
 
   listar() {
     this.schedulingDayService.getSchedulingDay().subscribe((schedulingDay: SchedulingDay[]) => {
-      this.schedulingDay = schedulingDay;
+      console.log(schedulingDay)
+      this.schedulingDay = schedulingDay;      
     });
   }
 
   delete(schedulingDay: SchedulingDay) {
     if (schedulingDay.id != null && schedulingDay.id != undefined) {
-      if (confirm(`Deseja remover o agendamento do dia ${this.datePipe.transform(schedulingDay.dia, 'dd/MM/yyyy')}?`)) {
+      if (confirm(`Deseja remover o agendamento do dia ${this.datePipe.transform(schedulingDay.date, 'dd/MM/yyyy')}?`)) {
         this.schedulingDayService.deleteSchedulingDay(schedulingDay).subscribe(() => {
           return this.listar();
         });

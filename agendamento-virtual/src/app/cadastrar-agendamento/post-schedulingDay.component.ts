@@ -4,12 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SchedulingDay } from '../models/schedulingDay';
 import { SchedulingDayService } from '../services/schedulingDay.service';
 
+
 @Component({
-  selector: 'app-cadastrar-agendamento',
-  templateUrl: './cadastrar-schedulingDay.component.html',
-  styleUrls: ['./cadastrar-schedulingDay.component.css']
+  selector: 'app-post-schedulingDay',
+  templateUrl: './post-schedulingDay.component.html',
+  styleUrls: ['./post-schedulingDay.component.css']
 })
-export class CadastrarSchedulingDayComponent implements OnInit {
+export class PostSchedulingDayComponent implements OnInit {
 
   schedulingDay: SchedulingDay;
 
@@ -22,12 +23,14 @@ export class CadastrarSchedulingDayComponent implements OnInit {
 
   ngOnInit(): void {
     const idAgendamento = this.route.snapshot.params['id'];
+    console.log(idAgendamento)
     if (idAgendamento != null && idAgendamento != undefined) {
       this.schedulingDay.id = idAgendamento;
       this.schedulingDayServices.getSchedulingDayId(this.schedulingDay).subscribe((agenda: any) => {
         var dateFormat = this.datePipe.transform(agenda.dia, 'yyyy-MM-dd'); // yyyy-MM-ddTHH:mm
         agenda.dia = dateFormat;
         this.schedulingDay = agenda;
+        console.log(this.schedulingDay)
       });
     }
   }
