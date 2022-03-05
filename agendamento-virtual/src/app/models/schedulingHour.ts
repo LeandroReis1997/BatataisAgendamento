@@ -2,7 +2,7 @@ import { SchedulingDay } from "./schedulingDay";
 
 export interface SchedulingHour {
     id: number;
-    horario: string;
+    hour: string;
     idDay: number;
     schedulingDay : SchedulingDay[];
 }

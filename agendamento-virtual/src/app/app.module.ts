@@ -9,13 +9,17 @@ import { FormsModule } from '@angular/forms';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import localePT from '@angular/common/locales/pt';
 import { PostSchedulingDayComponent } from './cadastrar-agendamento/post-schedulingDay.component';
+import { ListSchedulingHourComponent } from './hour/listar-horario/list-scheduling-hour.component';
+import { PostSchedulingHourComponent } from './hour/cadastrar-horario/post-scheduling-hour.component';
 registerLocaleData(localePT);
 
 @NgModule({
   declarations: [
     AppComponent,
     ListSchedulingDayComponent,
-    PostSchedulingDayComponent
+    PostSchedulingDayComponent,
+    ListSchedulingHourComponent,
+    PostSchedulingHourComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 import { Routes } from "@angular/router";
 import { PostSchedulingDayComponent } from "./cadastrar-agendamento/post-schedulingDay.component";
+import { ListSchedulingHourComponent } from "./hour/listar-horario/list-scheduling-hour.component";
 import { ListSchedulingDayComponent } from "./listar-agendamento/list-schedulingDay.component";
 
 
@@ -19,5 +20,9 @@ export const SchedulingRoutes: Routes = [
     {
         path: 'schedulingDay/cadastrar/:id',
         component: PostSchedulingDayComponent
-    }
+    },
+    {
+        path: 'schedulingHour',
+        component: ListSchedulingHourComponent
+    },
 ];
