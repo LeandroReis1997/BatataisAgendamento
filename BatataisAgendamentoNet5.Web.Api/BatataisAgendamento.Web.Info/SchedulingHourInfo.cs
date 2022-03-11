@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Nest;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BatataisAgendamento.Web.Info
@@ -8,7 +8,10 @@ namespace BatataisAgendamento.Web.Info
         public int Id { get; set; }
         public string Hour { get; set; }
         [ForeignKey("SchedulingDay")]
+        [Ignore]
         public int IdDay { get; set; }
-        public virtual SchedulingDayInfo SchedulingDay { get; set; }
+
+        [Ignore]
+        public SchedulingDayInfo DayInfo { get; set; }
     }
 }

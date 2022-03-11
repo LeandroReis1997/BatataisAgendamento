@@ -1,7 +1,6 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using Nest;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BatataisAgendamento.Web.Info
 {
@@ -9,5 +8,6 @@ namespace BatataisAgendamento.Web.Info
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
+        public virtual List<SchedulingHourInfo> SchedulingHourInfoList { get; set; }
     }
 }

@@ -23,6 +23,7 @@ using Pomelo.EntityFrameworkCore.MySql;
 using BatataisAgendamento.Web.Info.Data.Configuration;
 using BatataisAgendamento.Web.Info.Data.Configuration.Interface;
 using Microsoft.Extensions.Options;
+using System.Text.Json.Serialization;
 
 namespace BatataisAgendamento.Web.Api
 {
@@ -45,6 +46,9 @@ namespace BatataisAgendamento.Web.Api
             services.AddScoped<ISchedulingHourDal, SchedulingHourDal>();
 
             string mySqlConnection = Configuration.GetConnectionString("DefaultConnection");
+
+            //services.AddControllers().AddJsonOptions(x =>
+            //    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 
             services.AddDbContextPool<SqlDbContext>(options =>
             options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));

@@ -2,6 +2,7 @@
 using BatataisAgendamento.Web.Info;
 using BatataisAgendamento.Web.Info.Data.Configuration.Interface;
 using BatataisAgendamento.Web.Info.SqlDbContext;
+using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,7 @@ namespace BatataisAgendamento.Web.Dal
         }
 
         public List<SchedulingDayInfo> GetAllSchedulingDayAsync() =>
-            _agendamentoDay.SchedulingDay.ToList();
+            _agendamentoDay.SchedulingDay.Include(x => x.SchedulingHourInfoList).ToList();
 
 
         public SchedulingDayInfo GetBySchedulingDayIdAsync(int id) =>

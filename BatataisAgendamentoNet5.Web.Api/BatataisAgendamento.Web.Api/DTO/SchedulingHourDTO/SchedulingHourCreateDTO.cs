@@ -1,4 +1,7 @@
-﻿namespace BatataisAgendamento.Web.Api.DTO.SchedulingHourDTO
+﻿using AutoMapper.Configuration.Annotations;
+using BatataisAgendamento.Web.Api.DTO.SchedulingDayDTO;
+
+namespace BatataisAgendamento.Web.Api.DTO.SchedulingHourDTO
 {
     public class SchedulingHourCreateDTO
     {

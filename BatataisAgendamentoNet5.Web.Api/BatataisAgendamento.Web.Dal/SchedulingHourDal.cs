@@ -40,10 +40,13 @@ namespace BatataisAgendamento.Web.Dal
         }
 
         public async Task<List<SchedulingHourInfo>> GetAllSchedulingHourAsync() =>
-            await _agendamentoHour.SchedulingHour.Include(x => x.SchedulingDay).ToListAsync();
+            await _agendamentoHour.SchedulingHour.ToListAsync();
 
 
         public async Task<SchedulingHourInfo> GetBySchedulingHourIdAsync(int id) =>
-           await _agendamentoHour.SchedulingHour.Include(x=> x.SchedulingDay).FirstOrDefaultAsync(x => x.Id.Equals(id));
+           await _agendamentoHour.SchedulingHour.FirstOrDefaultAsync(x => x.Id.Equals(id));
+
+        public Task<List<SchedulingHourInfo>> GetBySchedulingHourIdDayAsync(int idDay) =>
+            _agendamentoHour.SchedulingHour.Where(x => x.IdDay == idDay).ToListAsync();
     }
 }

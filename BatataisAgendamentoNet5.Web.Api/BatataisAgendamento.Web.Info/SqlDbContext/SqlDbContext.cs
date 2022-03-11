@@ -9,5 +9,14 @@ namespace BatataisAgendamento.Web.Info.SqlDbContext
 
         public DbSet<SchedulingDayInfo> SchedulingDay { get; set; }
         public DbSet<SchedulingHourInfo> SchedulingHour { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.ApplyConfigurationsFromAssembly(System.Reflection.Assembly.GetExecutingAssembly());
+
+            //builder.InserirRegistrosPadrao();
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

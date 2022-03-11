@@ -2,6 +2,7 @@
 using BatataisAgendamento.Web.Dal.Interface;
 using BatataisAgendamento.Web.Info;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BatataisAgendamento.Web.Bll
@@ -9,21 +10,45 @@ namespace BatataisAgendamento.Web.Bll
     public class SchedulingDayBll : ISchedulingDayBll
     {
         private ISchedulingDayDal _dal;
+        private ISchedulingHourDal _hourDal;
 
-        public SchedulingDayBll(ISchedulingDayDal schedulingDayDal)
+        public SchedulingDayBll(ISchedulingDayDal schedulingDayDal, ISchedulingHourDal hourDal)
         {
             _dal = schedulingDayDal;
+            _hourDal = hourDal;
         }
 
         public async Task<SchedulingDayInfo> AddSchedulingDayAsync(SchedulingDayInfo scheduling)
         {
-            return await _dal.AddSchedulingDayAsync(scheduling);
-            //return await _dal.AddSchedulingAsync(new AgendamentoInfo
-            //{
-            //    Id = scheduling.Id,
-            //    Dia = DateTime.Now.Date,
-            //    Horario = DateTime.Now.ToString("HH:mm")
-            //});
+            //return await _dal.AddSchedulingDayAsync(scheduling);
+
+            //var teste2 = new List< SchedulingHourInfo>();
+
+            var testeeeee = new SchedulingDayInfo
+            {
+                Date = scheduling.Date,
+                SchedulingHourInfoList = new List<SchedulingHourInfo>()
+            };
+
+            foreach (var item in scheduling.SchedulingHourInfoList)
+            {
+                testeeeee.SchedulingHourInfoList.Add(new SchedulingHourInfo
+                {
+                    Hour = item.Hour,
+                    IdDay = testeeeee.Id
+                });
+            }
+
+            var rerer = await _dal.AddSchedulingDayAsync(testeeeee);
+
+            foreach (var item in testeeeee.SchedulingHourInfoList)
+            {
+                item.DayInfo = null;
+
+            }
+
+
+            return testeeeee;
         }
 
         public async Task DeleteSchedulingDayAsync(int id)
