@@ -4,6 +4,9 @@
             <label for="nome">Novo dia:</label>
             <input type="date" class="form-control" id="day" name="day" [(ngModel)]="schedulingDay.date" required autofocus>
         </div>
+
+        <post-scheduling-hour></post-scheduling-hour>
+
         <div class="form-group text-center">
             <input type="submit" class="btn btn-success" value="Enviar" (click)="enviar(schedulingDay.id)" >
             <a [routerLink]="['/schedulingDay']" class="btn btn-default">

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SchedulingDay } from '../models/schedulingDay';
 import { SchedulingDayService } from '../services/schedulingDay.service';
+import { SchedulingHourService } from '../services/schedulingHour.service';
 
 
 @Component({
@@ -15,6 +16,7 @@ export class PostSchedulingDayComponent implements OnInit {
   schedulingDay: SchedulingDay;
 
   constructor(private schedulingDayServices: SchedulingDayService,
+    private schedulingHourServices : SchedulingHourService,
     private route: ActivatedRoute,
     private router: Router,
     public datePipe: DatePipe) {
