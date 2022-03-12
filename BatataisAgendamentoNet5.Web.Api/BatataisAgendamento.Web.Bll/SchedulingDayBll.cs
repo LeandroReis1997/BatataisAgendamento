@@ -20,10 +20,6 @@ namespace BatataisAgendamento.Web.Bll
 
         public async Task<SchedulingDayInfo> AddSchedulingDayAsync(SchedulingDayInfo scheduling)
         {
-            //return await _dal.AddSchedulingDayAsync(scheduling);
-
-            //var teste2 = new List< SchedulingHourInfo>();
-
             var testeeeee = new SchedulingDayInfo
             {
                 Date = scheduling.Date,
@@ -39,12 +35,11 @@ namespace BatataisAgendamento.Web.Bll
                 });
             }
 
-            var rerer = await _dal.AddSchedulingDayAsync(testeeeee);
+            await _dal.AddSchedulingDayAsync(testeeeee);
 
             foreach (var item in testeeeee.SchedulingHourInfoList)
             {
                 item.DayInfo = null;
-
             }
 
 
@@ -75,12 +70,11 @@ namespace BatataisAgendamento.Web.Bll
                 });
             }
 
-            var rerer = await _dal.EditSchedulingDayAsync(id, testeeeee);
+            await _dal.EditSchedulingDayAsync(id, testeeeee);
 
             foreach (var item in testeeeee.SchedulingHourInfoList)
             {
                 item.DayInfo = null;
-
             }
 
             return testeeeee;
