@@ -56,13 +56,34 @@ namespace BatataisAgendamento.Web.Bll
             await _dal.DeleteSchedulingDayAsync(id);
         }
 
-        public async Task<SchedulingDayInfo> EditSchedulingDayAsync(int id, SchedulingDayInfo schedulingDay)
+        public async Task<SchedulingDayInfo> EditSchedulingDayAsync(int id, SchedulingDayInfo scheduling)
         {
-            return await _dal.EditSchedulingDayAsync(id, new SchedulingDayInfo
+            var testeeeee = new SchedulingDayInfo
             {
                 Id = id,
-                Date = schedulingDay.Date
-            });
+                Date = scheduling.Date,
+                SchedulingHourInfoList = new List<SchedulingHourInfo>()
+            };
+
+            foreach (var item in scheduling.SchedulingHourInfoList)
+            {
+                testeeeee.SchedulingHourInfoList.Add(new SchedulingHourInfo
+                {
+                    Id = item.Id,
+                    Hour = item.Hour,
+                    IdDay = testeeeee.Id
+                });
+            }
+
+            var rerer = await _dal.EditSchedulingDayAsync(id, testeeeee);
+
+            foreach (var item in testeeeee.SchedulingHourInfoList)
+            {
+                item.DayInfo = null;
+
+            }
+
+            return testeeeee;
         }
 
         public List<SchedulingDayInfo> GetAllSchedulingDayAsync()

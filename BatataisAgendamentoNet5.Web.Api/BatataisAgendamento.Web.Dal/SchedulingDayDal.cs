@@ -45,6 +45,6 @@ namespace BatataisAgendamento.Web.Dal
 
 
         public SchedulingDayInfo GetBySchedulingDayIdAsync(int id) =>
-            _agendamentoDay.SchedulingDay.FirstOrDefault(x => x.Id.Equals(id));
+            _agendamentoDay.SchedulingDay.Include(x => x.SchedulingHourInfoList).FirstOrDefault(x => x.Id.Equals(id));
     }
 }
