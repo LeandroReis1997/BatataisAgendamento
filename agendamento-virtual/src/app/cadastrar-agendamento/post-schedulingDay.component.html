@@ -4,8 +4,14 @@
             <label for="nome">Novo dia:</label>
             <input type="date" class="form-control" id="day" name="day" [(ngModel)]="schedulingDay.date" required autofocus>
         </div>
+        
+        <button (click)="teste()">Add</button> 
+        <button (click)="teste1()">Remover</button> 
 
-        <post-scheduling-hour></post-scheduling-hour>
+        <div class="form-group" *ngFor="let item of schedulingDay.schedulingHour">
+            <label for="nome">Horário:</label>
+            <input type="time" class="form-control" id="hour" name="hour" [(ngModel)]="item.hour" required>
+        </div>
 
         <div class="form-group text-center">
             <input type="submit" class="btn btn-success" value="Enviar" (click)="enviar(schedulingDay.id)" >

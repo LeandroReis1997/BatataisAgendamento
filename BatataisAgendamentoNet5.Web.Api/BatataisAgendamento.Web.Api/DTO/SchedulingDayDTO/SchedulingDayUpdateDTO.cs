@@ -8,7 +8,7 @@ namespace BatataisAgendamento.Web.Api.DTO.SchedulingDayDTO
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        public virtual List<SchedulingHourUpdateDTO> SchedulingHourUpdateDTO { get; set; }
+        public virtual List<SchedulingHourUpdateDTO> SchedulingHour { get; set; }
 
     }
 }
