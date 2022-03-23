@@ -30,8 +30,6 @@ export class PostSchedulingDayComponent implements OnInit {
         idDay: 0
       }
     ];
-
-    console.log(this.schedulingDay)
   }
 
 
@@ -44,7 +42,7 @@ export class PostSchedulingDayComponent implements OnInit {
         var dateFormat = this.datePipe.transform(agenda.date, 'yyyy-MM-dd'); // yyyy-MM-ddTHH:mm
         agenda.date = dateFormat;
         this.schedulingDay = agenda;
-        // console.log(this.schedulingDay)
+        console.log(this.schedulingDay)
       });
     }
   }
@@ -66,12 +64,10 @@ export class PostSchedulingDayComponent implements OnInit {
     console.log(this.schedulingDay)
   }
 teste(){
-  debugger
   this.schedulingDay.schedulingHour.push({id: 0, hour:'', idDay:0});
 }
 
 teste1(){
-  debugger
  let a = this.schedulingDay.schedulingHour;
 
 }

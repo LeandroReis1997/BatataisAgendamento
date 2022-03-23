@@ -5,12 +5,18 @@
             <input type="date" class="form-control" id="day" name="day" [(ngModel)]="schedulingDay.date" required autofocus>
         </div>
         
-        <button (click)="teste()">Add</button> 
-        <button (click)="teste1()">Remover</button> 
+         <button (click)="teste()">Add</button> 
+        <!-- <button (click)="teste1()">Remover</button> -->
 
         <div class="form-group" *ngFor="let item of schedulingDay.schedulingHour">
-            <label for="nome">Horário:</label>
-            <input type="time" class="form-control" id="hour" name="hour" [(ngModel)]="item.hour" required>
+            <div *ngIf="item.id == 0" >
+                <label for="nome">Horário Inserir:</label>
+                <input type="time" class="form-control" name="teste" [(ngModel)]="item.hour">
+            </div> 
+            <div *ngIf="item.id" >
+                <label for="nome">Horário Altera:</label>
+                <input type="time" class="form-control" name="teste" [value]="item.hour">
+            </div> 
         </div>
 
         <div class="form-group text-center">
