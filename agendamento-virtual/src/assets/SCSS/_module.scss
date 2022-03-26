@@ -1,0 +1,8 @@
+//EXAMPLE IMPORT SHARED @import './shared/'
+//EXAMPLE IMPORT COMPONENTS @import './components'
+
+@import './shared/variables';
+@import './shared/reset';
+
+@import './components/sidebar';
+@import './components/listSchedule';

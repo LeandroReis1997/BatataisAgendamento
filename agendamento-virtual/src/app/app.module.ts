@@ -11,6 +11,7 @@ import localePT from '@angular/common/locales/pt';
 import { PostSchedulingDayComponent } from './cadastrar-agendamento/post-schedulingDay.component';
 import { ListSchedulingHourComponent } from './hour/listar-horario/list-scheduling-hour.component';
 import { PostSchedulingHourComponent } from './hour/cadastrar-horario/post-scheduling-hour.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 registerLocaleData(localePT);
 
 @NgModule({
@@ -19,7 +20,8 @@ registerLocaleData(localePT);
     ListSchedulingDayComponent,
     PostSchedulingDayComponent,
     ListSchedulingHourComponent,
-    PostSchedulingHourComponent
+    PostSchedulingHourComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

@@ -22,8 +22,7 @@ export class ListSchedulingDayComponent implements OnInit {
 
   listar() {
     this.schedulingDayService.getSchedulingDay().subscribe((schedulingDay: SchedulingDay[]) => {
-      this.schedulingDay = schedulingDay;      
-      console.log(this.schedulingDay)
+      this.schedulingDay = schedulingDay;
     });
   }
 
